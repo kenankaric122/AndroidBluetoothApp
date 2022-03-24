@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
@@ -77,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 bAdapter.disable();
+                scanlistview.setVisibility(View.INVISIBLE);
+                poruka.setVisibility(View.INVISIBLE);
+                btnsend.setVisibility(View.INVISIBLE);
                 Toast.makeText(getApplicationContext(),"Bluetooth isključen", Toast.LENGTH_SHORT).show();
             }
         });
@@ -95,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     Toast.makeText(getApplicationContext(), "Uključite Bluetooth",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    scanlistview.setVisibility(View.VISIBLE);
+                    poruka.setVisibility(View.VISIBLE);
+                    btnsend.setVisibility(View.VISIBLE);
                     if(bt.size() > 0){
                         for(BluetoothDevice device:bt){
                             btArray[index] = device;
@@ -112,8 +117,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View view) {
 
-                String message = String.valueOf(poruka.getText());
-                sendRecieve.write(message.getBytes());
+                if(!bAdapter.isEnabled()){
+                    Toast.makeText(getApplicationContext(), "Bluetooth nije uključen", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    String message = String.valueOf(poruka.getText());
+                    sendRecieve.write(message.getBytes());
+                }
+
             }
         });
 
