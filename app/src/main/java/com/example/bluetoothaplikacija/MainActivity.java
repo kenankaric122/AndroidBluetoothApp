@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -20,7 +21,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -52,43 +57,56 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Button scanbutton = (Button)findViewById(R.id.btnDiscover);
         ListView scanlistview = (ListView)findViewById(R.id.lista);
         EditText poruka = (EditText)findViewById(R.id.poruka);
+        TextView bttext = (TextView) findViewById(R.id.textView3);
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
+
+        if(bAdapter.isEnabled()){
+            bttext.setText("Bluetooth uključen");
+        }
+
+        if(!bAdapter.isEnabled()){
+            bttext.setText("Bluetooth isključen");
+        }
 
 
         btntOn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
                 if(bAdapter == null)
                 {
-                    Toast.makeText(getApplicationContext(),"Bluetooth nije podržan",Toast.LENGTH_SHORT).show();
+                    bttext.setVisibility(View.VISIBLE);
+                    bttext.setText("Nije podržan");
                 }
                 else{
                     if(!bAdapter.isEnabled()){
                         startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE),1);
                         startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE), 1);
-                        Toast.makeText(getApplicationContext(),"Bluetooth uključen",Toast.LENGTH_SHORT).show();
+                        bttext.setText("Bluetooth uključen");
                     }
                 }
             }
         });
 
         btntOff.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
                 bAdapter.disable();
                 scanlistview.setVisibility(View.INVISIBLE);
                 poruka.setVisibility(View.INVISIBLE);
                 btnsend.setVisibility(View.INVISIBLE);
-                Toast.makeText(getApplicationContext(),"Bluetooth isključen", Toast.LENGTH_SHORT).show();
+                bttext.setText("Bluetooth isključen");
             }
         });
 
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1001); //Any number
 
         scanbutton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public void onClick(View view) {
-                Set<BluetoothDevice> bt = bAdapter.getBondedDevices();
+                @SuppressLint("MissingPermission") Set<BluetoothDevice> bt = bAdapter.getBondedDevices();
                 btArray = new BluetoothDevice[bt.size()];
                 String[] strings = new String[bt.size()];
                 int index = 0;
@@ -141,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         private BluetoothDevice device;
         private BluetoothSocket socket;
 
+        @SuppressLint("MissingPermission")
         public ClientClass (BluetoothDevice device1){
             device = device1;
             try{
