@@ -68,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             bttext.setText("Bluetooth isključen");
         }
 
+        if(bAdapter == null){
+            bttext.setText("Nije podržano");
+        }
+
 
         btntOn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("MissingPermission")
@@ -124,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             strings[index] = (device.getName() + "\n" + device.getAddress());
                             index++;
                         }
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,strings);
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_style_layout,strings);
                     scanlistview.setAdapter(arrayAdapter);
                     }
                 }
