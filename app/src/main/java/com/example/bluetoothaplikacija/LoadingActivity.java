@@ -76,8 +76,6 @@ public class LoadingActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     public void openActivity(){

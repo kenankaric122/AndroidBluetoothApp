@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     BluetoothSocket btsocket = null;
     SendRecieve sendRecieve;
     BluetoothDevice[] btArray;
+    TextView bttext1 = (TextView) findViewById(R.id.textView4);
+    boolean check = false;
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -100,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 scanlistview.setVisibility(View.INVISIBLE);
                 poruka.setVisibility(View.INVISIBLE);
                 btnsend.setVisibility(View.INVISIBLE);
+                bttext1.setVisibility(View.INVISIBLE);
                 bttext.setText("Bluetooth isključen");
             }
         });
@@ -115,23 +119,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 String[] strings = new String[bt.size()];
                 int index = 0;
 
-                if(!bAdapter.isEnabled()){
-                    Toast.makeText(getApplicationContext(), "Uključite Bluetooth",Toast.LENGTH_SHORT).show();
-                }
-                else{
+                if(bAdapter.isEnabled()){
+
                     scanlistview.setVisibility(View.VISIBLE);
                     poruka.setVisibility(View.VISIBLE);
                     btnsend.setVisibility(View.VISIBLE);
+                    bttext1.setVisibility(View.VISIBLE);
+                    bttext1.setText("Niste povezani");
                     if(bt.size() > 0){
                         for(BluetoothDevice device:bt){
                             btArray[index] = device;
                             strings[index] = (device.getName() + "\n" + device.getAddress());
                             index++;
                         }
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_style_layout,strings);
-                    scanlistview.setAdapter(arrayAdapter);
+                        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_style_layout,strings);
+                        scanlistview.setAdapter(arrayAdapter);
                     }
+
                 }
+                else{
+                    bttext.setText("Uključite Bluetooth");
+                }
+
             }
         });
 
@@ -139,8 +148,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View view) {
 
-                if(!bAdapter.isEnabled()){
-                    Toast.makeText(getApplicationContext(), "Bluetooth nije uključen", Toast.LENGTH_SHORT).show();
+                if(check == false){
+                   bttext1.setText("Povezite se da bi poslali poruku");
                 }
                 else{
                     String message = String.valueOf(poruka.getText());
@@ -177,12 +186,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 socket.connect();
                 sendRecieve = new SendRecieve(socket);
                 sendRecieve.start();
-                Toast.makeText(getApplicationContext(), "povezano, valjda",Toast.LENGTH_SHORT).show();
+                bttext1.setText("Povezani ste");
+                check = true;
 
             }
             catch (IOException e){
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "nije, valjda",Toast.LENGTH_SHORT).show();
+                bttext1.setText("Niste povezani");
+                check = false;
             }
         }
     }
@@ -210,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         public void write(byte[] bytes){
             try{
                 outputStream.write(bytes);
-                Toast.makeText(getApplicationContext(), "šaljem",Toast.LENGTH_SHORT).show();
+                bttext1.setText("Poruka poslata");
             }
             catch (IOException e){
                 e.printStackTrace();

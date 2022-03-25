@@ -31,6 +31,28 @@
         app:layout_constraintTop_toBottomOf="@+id/btnDiscover" />
 
     <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="190dp"
+        android:layout_marginTop="536dp"
+        android:layout_marginEnd="190dp"
+        android:layout_marginBottom="233dp"
+        android:fontFamily="@font/advent_pro_bold"
+        android:letterSpacing="0.2"
+        android:lineSpacingExtra="0sp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -155,10 +177,11 @@
         android:ems="10"
         android:fontFamily="@font/advent_pro_bold"
         android:hint=" Unesite obavjestenje"
-        android:visibility="invisible"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColor="#213C73"
+        android:textColorHint="#686868"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintCircleRadius="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
