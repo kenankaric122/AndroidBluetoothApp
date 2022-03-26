@@ -41,8 +41,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     BluetoothSocket btsocket = null;
     SendRecieve sendRecieve;
     BluetoothDevice[] btArray;
-    TextView bttext1 = (TextView) findViewById(R.id.textView4);
-    boolean check = false;
+    boolean check;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -61,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         ListView scanlistview = (ListView)findViewById(R.id.lista);
         EditText poruka = (EditText)findViewById(R.id.poruka);
         TextView bttext = (TextView) findViewById(R.id.textView3);
+        TextView bttext1 = (TextView) findViewById(R.id.textView4);
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
 
         if(bAdapter.isEnabled()){
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View view) {
 
-                if(check == false){
+                if(!check){
                    bttext1.setText("Povezite se da bi poslali poruku");
                 }
                 else{
@@ -164,6 +164,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 ClientClass clientClass = new ClientClass(btArray[i]);
                 clientClass.start();
+                if(check){
+                    bttext1.setText("Povezani ste");
+                }
+                else{
+                    bttext1.setText("Niste povezani");
+                }
             }
         });
     }
@@ -182,18 +188,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
 
             try{
-
+                check = true;
                 socket.connect();
                 sendRecieve = new SendRecieve(socket);
                 sendRecieve.start();
-                bttext1.setText("Povezani ste");
-                check = true;
 
             }
             catch (IOException e){
-                e.printStackTrace();
-                bttext1.setText("Niste povezani");
                 check = false;
+                e.printStackTrace();
             }
         }
     }
@@ -221,7 +224,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         public void write(byte[] bytes){
             try{
                 outputStream.write(bytes);
-                bttext1.setText("Poruka poslata");
             }
             catch (IOException e){
                 e.printStackTrace();
