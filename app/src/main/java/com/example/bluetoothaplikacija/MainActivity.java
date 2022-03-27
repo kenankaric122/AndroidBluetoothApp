@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         EditText poruka = (EditText)findViewById(R.id.poruka);
         TextView bttext = (TextView) findViewById(R.id.textView3);
         TextView bttext1 = (TextView) findViewById(R.id.textView4);
+        Button infoBtn = (Button) findViewById(R.id.btnDiscover2);
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
 
         if(bAdapter.isEnabled()){
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 poruka.setVisibility(View.INVISIBLE);
                 btnsend.setVisibility(View.INVISIBLE);
                 bttext1.setVisibility(View.INVISIBLE);
+                infoBtn.setVisibility(View.VISIBLE);
                 bttext.setText("Bluetooth isključen");
             }
         });
@@ -125,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     poruka.setVisibility(View.VISIBLE);
                     btnsend.setVisibility(View.VISIBLE);
                     bttext1.setVisibility(View.VISIBLE);
+                    infoBtn.setVisibility(View.INVISIBLE);
                     bttext1.setText("Niste povezani");
                     if(bt.size() > 0){
                         for(BluetoothDevice device:bt){

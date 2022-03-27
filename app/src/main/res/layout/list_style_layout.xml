@@ -9,6 +9,6 @@
     android:textAlignment="center"
     android:textColor="#213C73"
     android:textSize="14sp"
-    android:textStyle="normal">
+    android:textStyle="bold">
 
 </TextView>

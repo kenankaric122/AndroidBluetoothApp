@@ -4,7 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/BluetoothAplikacija/app/src/main/res/drawable/rounder_corner.xml" value="0.275" />
-        <entry key="..\:/BluetoothAplikacija/app/src/main/res/layout/activity_loading.xml" value="0.22" />
+        <entry key="..\:/BluetoothAplikacija/app/src/main/res/layout/activity_info.xml" value="0.25" />
+        <entry key="..\:/BluetoothAplikacija/app/src/main/res/layout/activity_loading.xml" value="0.25" />
         <entry key="..\:/BluetoothAplikacija/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/BluetoothAplikacija/app/src/main/res/layout/list_color_font.xml" value="0.24675925925925926" />
         <entry key="..\:/BluetoothAplikacija/app/src/main/res/layout/list_style_layout.xml" value="0.22407407407407406" />
