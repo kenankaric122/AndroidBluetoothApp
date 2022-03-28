@@ -29,6 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BluetoothAplikacija">
         <activity
+            android:name=".InfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity

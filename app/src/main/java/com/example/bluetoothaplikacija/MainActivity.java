@@ -110,6 +110,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        infoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity();
+            }
+        });
+
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1001); //Any number
 
         scanbutton.setOnClickListener(new View.OnClickListener() {
@@ -233,6 +240,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
             }
         }
+
+    public void openActivity(){
+        Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
