@@ -22,23 +22,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    ArrayList<String> stringArrayList=new ArrayList<String>();
-    ArrayAdapter<String> arrayAdapter;
     static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    BluetoothSocket btsocket = null;
     SendRecieve sendRecieve;
     BluetoothDevice[] btArray;
     boolean check;
@@ -164,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 else{
                     String message = String.valueOf(poruka.getText());
                     sendRecieve.write(message.getBytes());
+                    bttext1.setText("Poruka poslana na uređaj");
                 }
 
             }
