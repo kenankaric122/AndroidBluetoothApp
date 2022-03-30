@@ -44,16 +44,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btntOn = (Button)findViewById(R.id.btnOn);
-        Button btntOff = (Button)findViewById(R.id.btnOFF);
-        Button btnsend = (Button)findViewById(R.id.btnsendtxt);
+        Button btntOn = findViewById(R.id.btnOn);
+        Button btntOff = findViewById(R.id.btnOFF);
+        Button btnsend = findViewById(R.id.btnsendtxt);
         final BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
-        Button scanbutton = (Button)findViewById(R.id.btnDiscover);
-        ListView scanlistview = (ListView)findViewById(R.id.lista);
-        EditText poruka = (EditText)findViewById(R.id.poruka);
-        TextView bttext = (TextView) findViewById(R.id.textView3);
-        TextView bttext1 = (TextView) findViewById(R.id.textView4);
-        Button infoBtn = (Button) findViewById(R.id.btnDiscover2);
+        Button scanbutton = findViewById(R.id.btnDiscover);
+        ListView scanlistview = findViewById(R.id.lista);
+        EditText poruka = findViewById(R.id.poruka);
+        TextView bttext = findViewById(R.id.textView3);
+        TextView bttext1 = findViewById(R.id.textView4);
+        Button infoBtn = findViewById(R.id.btnDiscover2);
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
 
         if(bAdapter.isEnabled()){
